@@ -6,7 +6,7 @@ import React from "react";
 function App(){
   return (
     <Routes>
-      <Route path="/" element={<Home/>}/>
+      <Route path="/" element={<Home/>}/>                     
       <Route path="/board" element={<BoardList/>}/>
     </Routes>
   )
