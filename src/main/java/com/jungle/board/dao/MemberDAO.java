@@ -17,7 +17,6 @@ public class MemberDAO {
     public List<Member> getAllMembers(){
         String sql = "select * from member";
         List<Member> members = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Member.class));
-
         return members;
     }
 }

@@ -1,19 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-
-// const Board = ({board}) => {
-//   return (
-//     <div>
-//       <b>{board.idx}</b>
-//       <b>{board.contents}</b>
-//       <b>{board.title}</b>
-//       <b>{board.createdAt}</b>
-//       <b>{board.creatByMemberId}</b>
-//     </div>
-//   );
-// };
+import { Link, useNavigate } from 'react-router-dom';
 
 const BoardList = () => {
+  const navigate = useNavigate();
   const [boardList, setBoardList] = useState([]);
 
   const getBoardList = async () => {
@@ -21,28 +11,22 @@ const BoardList = () => {
     console.log(resp)
     setBoardList(resp);
     console.log(resp);
-
-    // const pngn = resp.pagination;
-    // console.log(pngn);
     }
   
+  const moveToWrite = () => {
+    navigate('/write');
+  };
+  // const boardRegister = async(e) => {
+  //   e.preventDefault();
+  //   try{
+  //     await axios.post('//localhost:8080/board')
+  //   }
+  // }
 
   useEffect(() => {
     getBoardList();
   }, []);
 
-//   return (
-//     <div>
-//       게시판 목록 출력
-//       <ul>
-//         {boardList.map((board) => (
-//           <li key={board.idx}>{board.idx} {board.title}</li>
-//           // board(); 
-//         ))}
-//       </ul>
-//     </div>
-//   )
-// }
 return (
     <div className="min-h-screen bg-gray-100 p-8">
       <h2 className="text-2xl font-bold text-center mb-6 text-blue-600">📋 게시판 목록</h2>
@@ -59,6 +43,9 @@ return (
           </li>
         ))}
       </ul>
+      <div>
+        <button onClick={moveToWrite}>글쓰기</button>
+      </div>
     </div>
   );
 };
