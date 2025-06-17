@@ -95,7 +95,7 @@ public class BoardController {
      * @param keyword
      * @return List<Board>
      */
-     @GetMapping("/search/{keyword}")
+     @GetMapping("/search")
      public List<Board> searchBoardByKeyword(@RequestParam("keyword") String keyword){
          List<Board> list = boardService.getBoardByKeyword(keyword);
          return list;

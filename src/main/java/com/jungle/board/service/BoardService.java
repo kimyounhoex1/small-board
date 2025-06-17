@@ -39,13 +39,20 @@ public class BoardService {
     return boardDAO.getBoardByKeyword(keyword);
   }
 
+  public List<Board> getBoardByMemberId(long memberId) {
+    List<Board> findBoards = boardDAO.getBoardByMemberId(memberId);
+    return findBoards;
+  }
+
+  /**
+   * TODO, 아직 미구현
+   * @param page
+   * @param size
+   * @return
+   */
   public List<Board> getBoardByPage(int page, int size) {
     return null;
   }
 
 
-  public List<Board> getBoardByMemberId(long memberId) {
-    List<Board> findBoards = boardDAO.getBoardByMemberId(memberId);
-    return findBoards;
-  }
 }

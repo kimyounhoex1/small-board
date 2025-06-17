@@ -63,11 +63,11 @@ public class BoardDAO {
         }
     }
 
-    public List<Board> getBoardByKeyword(String title){
-        String sql = "select * from board where idx like ?";
+    public List<Board> getBoardByKeyword(String keyword){
+        String sql = "select * from board where title like ? or contents like ?";
         try {
             List<Board> result = jdbcTemplate.query(sql,
-                    new Object[]{"%" + title + "%"},
+                    new Object[]{"%" + keyword + "%", "%" + keyword + "%"},
                     new BeanPropertyRowMapper<>(Board.class));
             return result;
         } catch (DataAccessException e) {
@@ -75,6 +75,7 @@ public class BoardDAO {
             return null;
         }
     }
+
 
     public List<Board> getBoardByMemberId(long memberId) {
         String sql = "select * from board where created_by = ?";
