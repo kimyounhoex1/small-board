@@ -12,12 +12,12 @@ public class Board {
     private String title;
 
     private LocalDateTime createdAt;
-    private long creatByMemberId;
+    private long createdBy;
 
     @Override
     public String toString() {
-        return "[Member]: idx = " + idx + ", contents = " + contents +
+        return "[Board]: idx = " + idx + ", contents = " + contents +
                 ", title = " + title + ", createdAt = " + createdAt +
-                ", creatByMemberId = " + creatByMemberId;
+                ", createdBy = " + createdBy;
     }
 }

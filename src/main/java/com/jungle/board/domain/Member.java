@@ -8,10 +8,14 @@ import lombok.Setter;
 public class Member {
     private long id;
     private String name;
+    private String nickname;
+    private String password;
     private int age;
 
     @Override
     public String toString() {
-        return "[Member]: id = " + id + ", name = " + name + ", age = " + age;
+        return "[Member]: id = " + id +
+                ", name = " + name + ", nickname = " + nickname +
+                ", password = " + password + ", age = " + age;
     }
 }

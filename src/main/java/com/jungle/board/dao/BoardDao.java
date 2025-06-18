@@ -19,7 +19,6 @@ public class BoardDAO {
     public List<Board> getAllBoards(){
         String sql = "select * from board";
         List<Board> boards = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Board.class));
-
         return boards;
     }
 
@@ -54,7 +53,7 @@ public class BoardDAO {
                 board.setTitle(rs.getString("title"));
                 board.setContents(rs.getString("contents"));
                 board.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
-                board.setCreatByMemberId(rs.getLong("created_by")); // DB 컬럼명 맞춰야 함
+                board.setCreatedBy(rs.getLong("created_by")); // DB 컬럼명 맞춰야 함
                 return board;
             });
         } catch (DataAccessException e) {
@@ -81,15 +80,6 @@ public class BoardDAO {
         String sql = "select * from board where created_by = ?";
         try {
             return jdbcTemplate.query(sql, new Object[]{memberId}, new BeanPropertyRowMapper<>(Board.class));
-//            return jdbcTemplate.queryForObject(sql, new Object[]{memberId}, (rs, rowNum) -> {
-//                Board board = new Board();
-//                board.setIdx(rs.getLong("idx"));
-//                board.setTitle(rs.getString("title"));
-//                board.setContents(rs.getString("contents"));
-//                board.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
-//                board.setCreatByMemberId(rs.getLong("created_by")); // DB 컬럼명 맞춰야 함
-//                return board;
-//            });
         } catch (DataAccessException e) {
             e.printStackTrace();
             return null;

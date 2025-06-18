@@ -14,4 +14,24 @@ public class MemberService {
     public List<Member> getAllMember(){
         return memberDAO.getAllMembers();
     }
+
+    public Member findMemberById(Long memberId) {
+        return memberDAO.findMemberById(memberId);
+    }
+    public boolean join(Member member) {
+        if(memberDAO.isDuplicateNickname(member.getNickname())){
+           throw new IllegalArgumentException("중복된 닉네임입니다.");
+        }
+        return memberDAO.join(member);
+    }
+
+    public boolean login(String nickname, String password) {
+        String passwordByNickname = memberDAO.findPasswordByNickname(nickname);
+        if (passwordByNickname.equals(password)) {
+            return true;
+        }
+        return false;
+    }
+
+
 }
