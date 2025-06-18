@@ -24,19 +24,13 @@
 
 ## 📁 프로젝트 구조 (Backend)
 
-com.jungle.board
-├── config # CORS, JWT 설정
-├── controller # REST API 컨트롤러
-├── dao # DB 접근 (JdbcTemplate)
-├── domain # Entity 클래스 (Board, Member)
-├── dto # (필요 시) 요청/응답 DTO
-├── service # 비즈니스 로직
-└── BoardApplication # main class
-
-yaml
-복사
-편집
-
+* com.jungle.board
+* ├── config
+* ├── controller
+* ├── dao
+* ├── domain
+* ├── service
+* └── BoardApplication 
 ---
 
 ## ✅ 주요 기능
@@ -88,22 +82,21 @@ yaml
 ./gradlew bootRun
 🔹 Frontend (React)
 bash
-복사
-편집
 cd frontend
 npm install
 npm run start
+
 프론트는 http://localhost:3000
 백엔드는 http://localhost:8080에서 동작
 
 💡 향후 개선 계획
- JWT refresh 토큰 재발급 로직 추가
+ * JWT refresh 토큰 재발급 로직 추가
 
- 게시글 페이징 처리
+ * 게시글 페이징 처리
+ 
+ * 댓글 기능
 
- 댓글 기능
-
- 로그인 상태 전역 관리 (Context API)
+ * 로그인 상태 전역 관리 (Context API)
 
 📌 참고
 프론트와 백엔드는 CORS 설정을 통해 분리된 포트에서 통신합니다.
