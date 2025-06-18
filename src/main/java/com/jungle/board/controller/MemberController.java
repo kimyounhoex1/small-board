@@ -1,7 +1,9 @@
 package com.jungle.board.controller;
 
+import com.jungle.board.config.JwtUtil;
 import com.jungle.board.domain.Member;
 import com.jungle.board.service.MemberService;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class MemberController {
 
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @GetMapping("/")
     public List<Member> getAllMembers(){
@@ -37,14 +41,22 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public boolean login(@RequestBody Map<String, String> loginData) {
+    public Map<String, String> login(@RequestBody Map<String, String> loginData) {
         String nickname = loginData.get("nickname");
         String password = loginData.get("password");
-        if(memberService.login(nickname, password)){
-//            Cookie
-            return true;
-        }
-        return false;
-    }
 
+        if(memberService.login(nickname, password)){
+            String accessToken = jwtUtil.generateAccessToken(nickname);
+            String refreshToken = jwtUtil.generateRefreshToken(nickname);
+
+            Map<String, String> tokens = new HashMap<>();
+            tokens.put("accessToken", accessToken);
+            tokens.put("refreshToken", refreshToken);
+            tokens.put("nickname", nickname);
+            return tokens;
+
+        } else {
+            throw new RuntimeException("로그인 실패");
+        }
+    }
 }
