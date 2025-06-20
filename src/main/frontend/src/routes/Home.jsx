@@ -15,8 +15,8 @@ const Home = () => {
   return (
     <div className="bg-white-100 min-h-screen flex justify-center items-center">
       <div className="bg-white rounded-2xl shadow-2xl p-10 max-w-md w-full text-center space-y-6">
-        <h1 className="text-3xl font-bold text-gray-800">🌿 Jungle Community</h1>
-        <p className="text-gray-600">환영합니다! 아래에서 로그인하거나 회원가입 해보세요.</p>
+        <h1 className="text-3xl font-bold text-gray-800">호 무 위 키</h1>
+        <p className="text-gray-600">웰 컴 마 이 에 어 리 어</p>
         <div className="flex justify-center gap-4">
           <button
             onClick={moveToLogin}

@@ -19,10 +19,10 @@ const BoardWrite = () => {
   const saveBoard = async () => {
     try {
       await axios.post("http://localhost:8080/api/board/write", board);
-      alert("✅ 게시글이 등록되었습니다!");
+      alert("게시글이 등록되었습니다!");
       navigate("/board");
     } catch (e) {
-      alert("오류 발생 🥲");
+      alert("오류 발생");
       console.error(e);
     }
   };
@@ -30,7 +30,7 @@ const BoardWrite = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
       <div className="w-full max-w-xl bg-white p-8 rounded-xl shadow-lg space-y-6">
-        <h2 className="text-2xl font-bold text-gray-800 text-center">✏️ 게시글 작성</h2>
+        <h2 className="text-2xl font-bold text-gray-800 text-center">게시글 작성</h2>
 
         <div>
           <label className="block text-sm font-medium text-gray-700">제목</label>

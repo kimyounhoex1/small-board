@@ -23,7 +23,7 @@ const BoardList = () => {
 
 return (
     <div className="min-h-screen bg-gray-100 p-8">
-      <h2 className="text-2xl font-bold text-center mb-6 text-blue-600">📋 게시판 목록</h2>
+      <h2 className="text-2xl font-bold text-center mb-6 text-blue-600"> 게시판 목록</h2>
       <ul className="space-y-4 max-w-2xl mx-auto">
         {boardList.map((board) => (
           <li
