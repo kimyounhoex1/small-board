@@ -1,17 +1,23 @@
-import React, {useEffect, useState} from 'react';
-import axios from "axios";
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from '../api/client';
 
 const BoardList = () => {
   const navigate = useNavigate();
   const [boardList, setBoardList] = useState([]);
 
   const getBoardList = async () => {
-    const resp = (await axios.get('http://localhost:8080/api/board')).data;
-    console.log(resp)
-    setBoardList(resp);
-    console.log(resp);
-  }
+    try {
+      const resp = (await api.get('api/board')).data;
+      setBoardList(resp);
+    } catch (error) {
+      console.error('게시글 목록 조회 실패', error);
+      // 인증 실패 시 로그인 화면으로 보낸다.
+      if (error?.response?.status === 401) {
+        navigate('/login');
+      }
+    }
+  };
   
   const moveToWrite = () => {
     navigate('/write');

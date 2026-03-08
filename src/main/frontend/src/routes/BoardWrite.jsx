@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../api/client";
 
 const BoardWrite = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const BoardWrite = () => {
 
   const saveBoard = async () => {
     try {
-      await axios.post("http://localhost:8080/api/board/write", board);
+      await api.post("api/board/write", board);
       alert("게시글이 등록되었습니다!");
       navigate("/board");
     } catch (e) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -8,8 +8,15 @@ const MemberJoin = () => {
     name: "",
     nickname: "",
     password: "",
-    age: ""
+    age: "",
   });
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      navigate("/home");
+    }
+  }, [navigate]);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -30,10 +37,14 @@ const MemberJoin = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
       <div className="w-full max-w-xl bg-white p-8 rounded-xl shadow-lg space-y-6">
-        <h2 className="text-2xl font-bold text-gray-800 text-center">🙋 회원가입</h2>
+        <h2 className="text-2xl font-bold text-gray-800 text-center">
+          🙋 회원가입
+        </h2>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">이름</label>
+          <label className="block text-sm font-medium text-gray-700">
+            이름
+          </label>
           <input
             type="text"
             name="name"
@@ -44,7 +55,9 @@ const MemberJoin = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">닉네임</label>
+          <label className="block text-sm font-medium text-gray-700">
+            닉네임
+          </label>
           <input
             type="text"
             name="nickname"
@@ -55,7 +68,9 @@ const MemberJoin = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">비밀번호</label>
+          <label className="block text-sm font-medium text-gray-700">
+            비밀번호
+          </label>
           <input
             type="password"
             name="password"
@@ -66,7 +81,9 @@ const MemberJoin = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">나이</label>
+          <label className="block text-sm font-medium text-gray-700">
+            나이
+          </label>
           <input
             type="number"
             name="age"

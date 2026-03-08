@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.jungle.board.domain.Board;
 
 @Repository
-public class BoardDAO {
+public class BoardDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

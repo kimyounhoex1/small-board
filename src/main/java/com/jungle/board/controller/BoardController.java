@@ -1,9 +1,11 @@
 package com.jungle.board.controller;
 
+import com.jungle.board.config.JwtUtil;
 import com.jungle.board.domain.Board;
 import com.jungle.board.service.BoardService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,17 +17,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000", "http://127.0.0.1:3000"}, allowCredentials = "true")
 @RequestMapping(("/api/board"))
 public class BoardController {
 
     @Autowired
     private BoardService boardService;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     /**
      * 전체 게시글 조회
      * 요청: localhost:8080/api/board
      * @return
      */
+
+    
     @GetMapping
     public List<Board>  getAllBoards(){
         List<Board> allBoard = boardService.getAllBoard();

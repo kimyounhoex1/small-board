@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MemberDAO {
+public class MemberDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
