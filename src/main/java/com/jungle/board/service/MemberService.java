@@ -1,6 +1,5 @@
 package com.jungle.board.service;
 
-import com.jungle.board.config.JwtUtil;
 import com.jungle.board.dao.MemberDao;
 import com.jungle.board.domain.Member;
 import java.util.List;

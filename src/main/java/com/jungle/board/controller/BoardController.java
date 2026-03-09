@@ -23,8 +23,6 @@ public class BoardController {
 
     @Autowired
     private BoardService boardService;
-    @Autowired
-    private JwtUtil jwtUtil;
 
     /**
      * 전체 게시글 조회
@@ -118,36 +116,4 @@ public class BoardController {
     public List<Board> getBoardByPage(@RequestParam int page, @RequestParam int size){
          return boardService.getBoardByPage(page, size);
      }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * 게시글 memberId별 board 조회
-     * @param memberId
-     * @return
-     */
-//    @GetMapping("/memberid/{memberId}")
-//    public Board getBoardByMemberId(@PathVariable long memberId){
-//        Board findBoard = boardService.getBoardByMemberId(memberId);
-//        return findBoard;
-//    }
-
-
 }

@@ -14,7 +14,7 @@ function App() {
       <Route path="/board" element={<BoardList />} />
       <Route path="/write" element={<BoardWrite />} />
       <Route path="/login" element={<MemberLogin />} />
-      <Route path="/join" element={<MemberJoin />} />
+      <Route path="/join" element={<MemberJoin />} />      
     </Routes>
   );
 }
