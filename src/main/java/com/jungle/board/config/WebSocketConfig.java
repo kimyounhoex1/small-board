@@ -12,8 +12,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        // url 엔드포인트 요청이 /chat으로 오는 경우 연결 (클라이언트 입장에서 요청)
-        registry.addEndpoint("/chat");
+        // 클라이언트가 최초로 접속할 WebSocket 엔드포인트
+        registry.addEndpoint("/ws")
+            .setAllowedOriginPatterns("http://localhost:3000", "http://127.0.0.1:3000")
+            .withSockJS();
     }
 
     @Override
