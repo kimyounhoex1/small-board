@@ -16,6 +16,7 @@ function App() {
       <Route path="/write" element={<BoardWrite />} />
       <Route path="/login" element={<MemberLogin />} />
       <Route path="/join" element={<MemberJoin />} />
+      <Route path="/chat/make" element={<MemberJoin />} />
       <Route path="/chat" element={<Webchat />} />
     </Routes>
   );

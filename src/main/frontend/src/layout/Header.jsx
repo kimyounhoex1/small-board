@@ -6,9 +6,8 @@ const Header = () => {
       <div className="max-w-5xl mx-auto flex justify-between items-center">
         <h1 className="text-xl font-bold text-blue-600"> 호 무 위 키</h1>
         <nav className="space-x-4">
-          <a href="/home" className="text-gray-700 hover:text-blue-500">홈</a>
+          <a href="/" className="text-gray-700 hover:text-blue-500">홈</a>
           <a href="/board" className="text-gray-700 hover:text-blue-500">게시판</a>
-          <a href="/chat" className="text-gray-700 hover:text-blue-500">채팅</a>
         </nav>
       </div>
     </header>
