@@ -13,13 +13,13 @@ public class ChatRoomRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public ChatRoom insertChatRoom(String roomName, String description, Long memberId) {
+    public ChatRoom insertChatRoom(String roomName, String description, Long create_by) {
         String sql = "insert into chat_room "
-                + "(roomName, description, memberId)  "
+                + "(room_name, description, created_by)  "
                 + "values (?, ?, ?)";
         int update;
         try {
-            update = jdbcTemplate.update(sql, roomName, description, memberId);
+            update = jdbcTemplate.update(sql, roomName, description, create_by);
         } catch (DataAccessException e) {
             System.out.println(e.getMessage() + " 오류 발생");
             throw new RuntimeException(e);
@@ -32,9 +32,8 @@ public class ChatRoomRepository {
         chatRoom.setRoomId(generatedId);
         chatRoom.setRoomName(roomName);
         chatRoom.setDescription(description);
-        chatRoom.setCreateBy(memberId);
+        chatRoom.setCreateBy(create_by);
 
         return chatRoom;
     }
-    
 }

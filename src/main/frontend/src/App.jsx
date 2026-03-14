@@ -5,6 +5,9 @@ import BoardWrite from "./routes/BoardWrite";
 import MemberLogin from "./routes/MemberLogin";
 import MemberJoin from "./routes/MemberJoin";
 import Webchat from "./routes/WebChat";
+import MakeChat from "./routes/MakeChat";
+import BoardDetail from "./routes/BoardDetail";
+import C
 import React from "react";
 
 function App() {
@@ -16,8 +19,9 @@ function App() {
       <Route path="/write" element={<BoardWrite />} />
       <Route path="/login" element={<MemberLogin />} />
       <Route path="/join" element={<MemberJoin />} />
-      <Route path="/chat/make" element={<MemberJoin />} />
       <Route path="/chat" element={<Webchat />} />
+      <Route path="/chat/:memberId" element={<MakeChat />} />
+      <Route path="/board/:boardId" element={<BoardDetail />} />
     </Routes>
   );
 }

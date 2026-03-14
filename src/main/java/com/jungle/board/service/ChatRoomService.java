@@ -17,4 +17,6 @@ public class ChatRoomService {
         return chatRoomRepository.insertChatRoom(roomName, description, memberId);
     }
 
+    
+
 }

@@ -67,6 +67,4 @@ public class ChatRoomController {
     public String getMethodName(@RequestParam String param) {
         return new String();
     }
-    
-    
 }

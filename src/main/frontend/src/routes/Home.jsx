@@ -8,6 +8,8 @@ const Home = () => {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
       navigate("/login");
+    } else {
+      navigate("/board");
     }
   }, [navigate]);
 

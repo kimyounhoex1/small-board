@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/client";
 
-const BoardList = () => {
+const ChatRoomList = () => {
   const navigate = useNavigate();
-  const [boardList, setBoardList] = useState([]);
+  const [chatList, setChatList] = useState([]);
 
-  const getBoardList = async () => {
+  const getChatList = async () => {
     try {
       const resp = (await api.get("api/board")).data;
       setBoardList(resp);
