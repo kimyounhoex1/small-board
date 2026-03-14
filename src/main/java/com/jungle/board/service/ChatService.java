@@ -8,5 +8,6 @@ import com.jungle.board.domain.ChatRoom;
 public class ChatService {
 
     
+    
 
 }
