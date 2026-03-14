@@ -48,9 +48,13 @@ public class MemberController {
         String password = loginData.get("password");
 
         if(memberService.login(nickname, password)){
-            String accessToken = jwtUtil.generateAccessToken(nickname);
-            String refreshToken = jwtUtil.generateRefreshToken(nickname);
+            Long memberId = memberService.getMemberId(nickname);
 
+            String accessToken = jwtUtil.generateAccessToken(memberId);
+            String refreshToken = jwtUtil.generateRefreshToken(memberId);
+
+
+            
             Map<String, String> tokens = new HashMap<>();
             tokens.put("accessToken", accessToken);
             tokens.put("refreshToken", refreshToken);

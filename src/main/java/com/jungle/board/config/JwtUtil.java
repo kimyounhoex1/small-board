@@ -22,18 +22,18 @@ public class JwtUtil {
         key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 
-    public String generateAccessToken(String nickname) {
+    public String generateAccessToken(Long memberId) {
         return Jwts.builder()
-                .setSubject(nickname)
+                .setSubject(memberId.toString())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + ACCESS_EXPIRATION))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    public String generateRefreshToken(String nickname) {
+    public String generateRefreshToken(Long memberId) {
         return Jwts.builder()
-                .setSubject(nickname)
+                .setSubject(memberId.toString())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + REFRESH_EXPIRATION))
                 .signWith(key, SignatureAlgorithm.HS256)
@@ -49,7 +49,7 @@ public class JwtUtil {
         }
     }
 
-    public String getNickname(String token) {
+    public String getMemberId(String token) {
         return Jwts.parserBuilder().setSigningKey(key).build()
                 .parseClaimsJws(token).getBody().getSubject();
     }
