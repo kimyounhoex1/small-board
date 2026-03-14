@@ -1,7 +1,8 @@
 package com.jungle.board.service;
 
-import com.jungle.board.dao.BoardDao;
 import com.jungle.board.domain.Board;
+import com.jungle.board.repository.BoardRepository;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,37 +11,37 @@ import org.springframework.stereotype.Service;
 @Service
 public class BoardService {
   @Autowired
-  private BoardDao boardDao;
+  private BoardRepository boardRepository;
 
   public List<Board> getAllBoard(){
-    return boardDao.getAllBoards();
+    return boardRepository.getAllBoards();
   }
 
   public boolean registerBoard(Board board, long id){
-    return boardDao.registerBoard(board, id);
+    return boardRepository.registerBoard(board, id);
   }
 
   public Board getBoardByBoardId(long boardId) {
-    Board resultBoard = boardDao.getBoardByBoardId(boardId);
+    Board resultBoard = boardRepository.getBoardByBoardId(boardId);
     return resultBoard;
   }
 
   public boolean updateBoard(Board board, long boardId) {
 //    boardDao.getBoardByTitle()
-    return boardDao.updateBoard(board, boardId);
+    return boardRepository.updateBoard(board, boardId);
   }
 
   public boolean deleteBoard(long boardId) {
-    return boardDao.deleteBoard(boardId);
+    return boardRepository.deleteBoard(boardId);
   }
 
   public List<Board> getBoardByKeyword(String keyword) {
 
-    return boardDao.getBoardByKeyword(keyword);
+    return boardRepository.getBoardByKeyword(keyword);
   }
 
   public List<Board> getBoardByMemberId(long memberId) {
-    List<Board> findBoards = boardDao.getBoardByMemberId(memberId);
+    List<Board> findBoards = boardRepository.getBoardByMemberId(memberId);
     return findBoards;
   }
 
