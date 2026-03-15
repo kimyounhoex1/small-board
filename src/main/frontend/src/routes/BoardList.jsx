@@ -6,7 +6,7 @@ const BoardList = () => {
   const navigate = useNavigate();
   const [boardList, setBoardList] = useState([]);
 
-  const getBoardList = async () => {
+  const getBoardList = async (memberId) => {
     try {
       const resp = (await api.get("api/board")).data;
       setBoardList(resp);

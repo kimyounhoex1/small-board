@@ -1,70 +1,69 @@
 package com.jungle.board.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.jungle.board.config.JwtUtil;
 import com.jungle.board.domain.ChatRoom;
-import com.jungle.board.domain.Member;
 import com.jungle.board.dto.ChatRoomRequest;
 import com.jungle.board.dto.ChatRoomResponse;
 import com.jungle.board.service.ChatRoomService;
-import com.jungle.board.service.MemberService;
-
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/chat")
+@RequiredArgsConstructor
 public class ChatRoomController {
 
-    @Autowired
-    private JwtUtil jwtUtils;
+    private final JwtUtil jwtUtils;
+    private final ChatRoomService chatRoomService;
 
-    @Autowired
-    private ChatRoomService chatRoomService;
-    @Autowired
-    private MemberService memberService;
+    @GetMapping("/rooms")
+    public List<ChatRoomResponse> getAllChatRooms(HttpServletRequest request) {
+        Long memberId = extractMemberId(request);
 
+        List<ChatRoom> chatRooms = chatRoomService.getAllChatRooms(memberId);
+        List<ChatRoomResponse> result = new ArrayList<>();
+        for (ChatRoom chatRoom : chatRooms) {
+            result.add(ChatRoomResponse.convert(chatRoom));
+        }
+        return result;
+    }
 
     @PostMapping("/create")
-    public ChatRoom createChatRoom(
+    public ChatRoomResponse createChatRoom(
         @RequestBody ChatRoomRequest req, 
         HttpServletRequest request) {
-
-        String getToken = request.getHeader("Authorization");
-        String creatorNickname = "";
-        Long memberId = null;
-        if(getToken != null && getToken.startsWith("Bearer ")) {
-            String token = getToken.substring(7);
-            memberId = Long.parseLong(jwtUtils.getMemberId(token));
-            Member member = memberService.findMemberById(memberId);
-            creatorNickname = member.getNickname();
-            System.out.println("채팅방 생성자 - " + memberId + ", " + creatorNickname);
-        }
+        Long memberId = extractMemberId(request);
 
         ChatRoom created = chatRoomService.createChatRoom(
-            req.getRoomName(), 
-            req.getDescription(), 
-            creatorNickname,
-            memberId);
-        return created;
-    }
-    
-    @GetMapping()
-    public String findChatRoom(@RequestParam String param) {
-        return new String();
+            req.getRoomName(),
+            req.getDescription(),
+            memberId)
+        ;
+        return ChatRoomResponse.convert(created);
     }
 
-    @GetMapping("path")
-    public String getMethodName(@RequestParam String param) {
-        return new String();
+    // api/chat/${chatId} // 채팅방 ID로 찾을거임
+    @GetMapping("/{chatId}")
+    public ChatRoomResponse getMemberChatRoom(
+        @PathVariable Long chatId,
+        HttpServletRequest request) {
+
+        ChatRoom chatRoom = chatRoomService.findChatRoom(chatId);
+        return ChatRoomResponse.convert(chatRoom);
+    }
+
+    private Long extractMemberId(HttpServletRequest request) {
+        String authorization = request.getHeader("Authorization");
+
+        if (authorization == null || !authorization.startsWith("Bearer ")) {
+            throw new IllegalArgumentException("유효한 Authorization 헤더가 없습니다.");
+        }
+
+        String token = authorization.substring(7);
+        return Long.parseLong(jwtUtils.getMemberId(token));
     }
 }
