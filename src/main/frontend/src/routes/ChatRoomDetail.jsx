@@ -5,11 +5,11 @@ import api from "../api/client";
 const ChatRoomDetail = () => {
   const navigate = useNavigate();
   const { chatRoomId } = useParams();
-  const [chatRoomDetail, setChatRoomDetail] = useState([]);
+  const [chatRoomDetail, setChatRoomDetail] = useState({});
 
-  const getChatRoomDetail = async (memberId, chatRoomId) => {
+  const getChatRoomDetail = async (chatRoomId) => {
     try {
-      const resp = (await api.get(`api/chat/${memberId}`)).data;
+      const resp = (await api.get(`api/chat/${chatRoomId}`)).data;
       setChatRoomDetail(resp);
     } catch (error) {
       console.error("게시글 목록 조회 실패", error);
@@ -25,7 +25,8 @@ const ChatRoomDetail = () => {
   };
 
   useEffect(() => {
-    getChatRoomDetail();
+    if (!chatRoomId) return;
+    getChatRoomDetail(chatRoomId);
   }, [chatRoomId]);
 
   /*
@@ -62,7 +63,8 @@ const ChatRoomDetail = () => {
         {chatRoomDetail.roomName}
       </div>
       <div style={{ color: "#666", fontSize: "14px" }}>
-        작성자: {chatRoomDetail.createdBy} | 작성일: {chatRoomDetail.createdAt}
+        작성자: {chatRoomDetail.createdByNickname ?? "-"} (ID:{" "}
+        {chatRoomDetail.createdBy}) | 작성일: {chatRoomDetail.createdAt}
       </div>
 
       <div style={{ marginTop: "20px" }}>

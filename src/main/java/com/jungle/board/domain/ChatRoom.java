@@ -1,9 +1,9 @@
 package com.jungle.board.domain;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +13,7 @@ public class ChatRoom {
     private Long roomId;
     private String roomName;
     private String description;
-
-    private Long createBy;
+    private Long createdBy;
+    private Date createdAt;
     private Map<String, Long> members = new ConcurrentHashMap<>();
 }

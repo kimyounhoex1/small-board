@@ -12,10 +12,7 @@ const Header = () => {
           <a href="/board" className="text-gray-700 hover:text-blue-500">
             게시판
           </a>
-          <a
-            href="/chat/memberId"
-            className="text-gray-700 hover:text-blue-500"
-          >
+          <a href="/chat" className="text-gray-700 hover:text-blue-500">
             채팅방
           </a>
         </nav>

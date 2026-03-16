@@ -1,7 +1,6 @@
 package com.jungle.board.controller;
 
 import com.jungle.board.config.JwtUtil;
-import com.jungle.board.domain.ChatRoom;
 import com.jungle.board.dto.ChatRoomRequest;
 import com.jungle.board.dto.ChatRoomResponse;
 import com.jungle.board.service.ChatRoomService;
@@ -9,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,14 +20,7 @@ public class ChatRoomController {
 
     @GetMapping("/rooms")
     public List<ChatRoomResponse> getAllChatRooms(HttpServletRequest request) {
-        Long memberId = extractMemberId(request);
-
-        List<ChatRoom> chatRooms = chatRoomService.getAllChatRooms(memberId);
-        List<ChatRoomResponse> result = new ArrayList<>();
-        for (ChatRoom chatRoom : chatRooms) {
-            result.add(ChatRoomResponse.convert(chatRoom));
-        }
-        return result;
+        return chatRoomService.getAllChatRooms();
     }
 
     @PostMapping("/create")
@@ -38,12 +29,10 @@ public class ChatRoomController {
         HttpServletRequest request) {
         Long memberId = extractMemberId(request);
 
-        ChatRoom created = chatRoomService.createChatRoom(
+        return chatRoomService.createChatRoom(
             req.getRoomName(),
             req.getDescription(),
-            memberId)
-        ;
-        return ChatRoomResponse.convert(created);
+            memberId);
     }
 
     // api/chat/${chatId} // 채팅방 ID로 찾을거임
@@ -52,8 +41,7 @@ public class ChatRoomController {
         @PathVariable Long chatId,
         HttpServletRequest request) {
 
-        ChatRoom chatRoom = chatRoomService.findChatRoom(chatId);
-        return ChatRoomResponse.convert(chatRoom);
+        return chatRoomService.findChatRoom(chatId);
     }
 
     private Long extractMemberId(HttpServletRequest request) {
